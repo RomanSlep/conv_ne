@@ -7,11 +7,11 @@ const SENSOR_DISTANCE = DIAMETR * 3;
 const EAT_COUNT = 10;
 const RADIUS_EAT = DIAMETR / 4;
 let GRAD = 5;
-let TIME_GAME = 30; 
+let TIME_GAME = 30;
 
 
 // ГРАФИКА 
-let SENSORS = 0; 
+let SENSORS = 0;
 
 function rnd(min, max) {
     min = min || 0;
@@ -37,43 +37,43 @@ function mathSensor(p1, p2) {
     const v = mathVector(p1, { // этот вектор не меняется
         x: p1.x,
         y: p1.y + 1
-	});
-	
+    });
+
     const vC = mathVector(p1, p2);
-	
+
     let v1 = mathVector(p1, { // угол с первой точкой
         x: p2.x - p2.rad,
         y: p2.y
-	});
-	
+    });
+
     let v2 = mathVector(p1, { // угол со 2йточкой
         x: p2.x + p2.rad,
         y: p2.y
-	});
-	
+    });
+
     let v3 = mathVector(p1, { // угол с 3 первой точкой
         x: p2.x,
         y: p2.y + p2.rad
-	});
-	
+    });
+
     let v4 = mathVector(p1, { // угол со 4й точкой
         x: p2.x,
         y: p2.y - p2.rad
-	});
-	
+    });
+
     let arrGrad = [mathAngle2V(v, v1), mathAngle2V(v, v2), mathAngle2V(v, v3), mathAngle2V(v, v4)]; // центральный угол
     let min = Math.min(...arrGrad);
     let max = Math.max(...arrGrad);
-	
+
     let operator = 'AND';
     if (vC.length > p2.rad && max - min > 180) operator = 'OR'
-	
+
     return {
         max,
         min,
         distance: vC.length,
         operator
-	};
+    };
 }
 
 
@@ -82,30 +82,30 @@ function mathSensorsEG(p1, p2) {
     const v = mathVector(p1, { // этот вектор не меняется
         x: p1.x,
         y: p1.y + 1
-	});
-	
+    });
+
     let v1 = mathVector(p1, { // угол с первой точкой
         x: p2.x1,
         y: p2.y1
-	});
-	
+    });
+
     let v2 = mathVector(p1, { // угол со 2йточкой
         x: p2.x2,
         y: p2.y2
-	});
-	
+    });
+
     let arrGrad = [mathAngle2V(v, v1), mathAngle2V(v, v2)]; // центральный угол
     let min = Math.min(...arrGrad);
     let max = Math.max(...arrGrad);
-	
+
     let operator = 'AND';
     if (max - min > 180) operator = 'OR'
-	
+
     return {
         max,
         min,
         operator
-	};
+    };
 }
 
 
@@ -115,7 +115,7 @@ function mathVector(start, stop) {
     return {
         pos,
         length
-	}
+    }
 }
 
 function mathAngle2V(v1, v2) {
@@ -141,29 +141,29 @@ function mathXYfromGrad(x, y, grad, V) {
         grad = grad * PI / 180;
         x += V * Math.cos(grad);
         y += V * Math.sin(grad);
-		
-		} else if (grad < 180) {
+
+    } else if (grad < 180) {
         grad = 180 - grad;
         grad = grad * PI / 180;
         x += V * Math.sin(grad);
         y -= V * Math.cos(grad);
-		} else if (grad < 270) {
+    } else if (grad < 270) {
         grad = 270 - grad;
         grad = grad * PI / 180;
         x -= V * Math.cos(grad);
         y -= V * Math.sin(grad);
-		} else {
+    } else {
         grad = 360 - grad;
         grad = grad * PI / 180;
         x -= V * Math.sin(grad);
         y += V * Math.cos(grad);
-	}
-	
+    }
+
     return {
         x,
         y
-	};
-	
+    };
+
 }
 
 
@@ -171,7 +171,7 @@ function checkCollision(el1, el2) {
     let metr = mathMetr(el1, el2);
     let sum = el1.rad + el2.rad;
     if (metr > sum) return false; // не пересекаются
-	
+
     return true;
 }
 
@@ -186,25 +186,25 @@ function mathMetr(el1, el2) {
 
 
 let arrEGs = [{
-	x1: 0,
-	y1: 0,
-	x2: WIDTH,
-	y2: 0
+        x1: 0,
+        y1: 0,
+        x2: WIDTH,
+        y2: 0
     }, {
-	x1: 0,
-	y1: 0,
-	x2: 0,
-	y2: HEIGHT
+        x1: 0,
+        y1: 0,
+        x2: 0,
+        y2: HEIGHT
     }, {
-	x1: 0,
-	y1: HEIGHT,
-	x2: WIDTH,
-	y2: HEIGHT
+        x1: 0,
+        y1: HEIGHT,
+        x2: WIDTH,
+        y2: HEIGHT
     }, {
-	x1: WIDTH,
-	y1: HEIGHT,
-	x2: WIDTH,
-	y2: 0
-}
+        x1: WIDTH,
+        y1: HEIGHT,
+        x2: WIDTH,
+        y2: 0
+    }
 
 ]

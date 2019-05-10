@@ -7,18 +7,18 @@ let isGamed = false;
 
 function draw() {
 	if (!isGamed)
-	return;
-	// console.log('-----------')
+		return;
+
 	background('#444');
 	Balls.forEach((b, i) => {
 		b.update(i);
 	});
-	
+
 	fill('gold');
 	stroke('gold');
 	Eats.forEach((e, i) => {
 		if (e.close)
-		Eats[i] = false;
+			Eats[i] = false;
 		ellipse(e.x, e.y, e.rad * 2, e.rad * 2);
 	});
 	Eats = _.compact(Eats);
@@ -36,7 +36,7 @@ var opt = {
 	mutation_rate: 0.05,
 	init_weight_magnitude: 0.1,
 	elite_percentage: 0.30
-	
+
 }
 
 
@@ -52,10 +52,10 @@ setInterval(refreshEat, 2000);
 
 function refreshEat() {
 	if (EAT_COUNT <= Eats.length)
-	return;
+		return;
 	let x = rnd(0, WIDTH);
 	let y = rnd(0, HEIGHT);
-	
+
 	Eats.push({
 		x,
 		y,
@@ -63,8 +63,8 @@ function refreshEat() {
 		i: Eats.length,
 		isEat: true
 	});
-	}
-	
+}
+
 let timeStart;
 let Alived = Balls.length;
 Cycle();
@@ -82,7 +82,7 @@ setInterval(() => {
 		isGamed = false;
 		Eva.stopEvolve();
 		Cycle();
-		
+
 	}
-	
+
 }, 2000)
