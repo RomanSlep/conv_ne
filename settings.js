@@ -1,7 +1,7 @@
 const WIDTH = 1000;
 const HEIGHT = 1000;
 const DIAMETR = 50;
-const POPSIZE = 100;
+const POPSIZE = 50;
 const SPEED = 150;
 const SENSOR_DISTANCE = DIAMETR * 3;
 const EAT_COUNT = 10;
